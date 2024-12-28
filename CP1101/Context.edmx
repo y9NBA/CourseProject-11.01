@@ -1,0 +1,766 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="График_работы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_сотрудника" Type="int" Nullable="false" />
+          <Property Name="Тип_графика" Type="nvarchar" MaxLength="255" />
+          <Property Name="Примечание" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Должности">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название_должности" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Заработная_плата">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_сотрудника" Type="int" Nullable="false" />
+          <Property Name="Дата_выплаты" Type="date" Nullable="false" />
+          <Property Name="Сумма" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="История_работы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_сотрудника" Type="int" Nullable="false" />
+          <Property Name="id_должности" Type="int" Nullable="false" />
+          <Property Name="id_отдела" Type="int" Nullable="false" />
+          <Property Name="Дата_начала" Type="date" Nullable="false" />
+          <Property Name="Дата_окончания" Type="date" />
+        </EntityType>
+        <EntityType Name="Контакты">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_сотрудника" Type="int" Nullable="false" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Навыки">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название_навыка" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Образование">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_сотрудника" Type="int" Nullable="false" />
+          <Property Name="Учебное_заведение" Type="nvarchar" MaxLength="255" />
+          <Property Name="Специальность" Type="nvarchar" MaxLength="255" />
+          <Property Name="Дата_окончания" Type="date" />
+          <Property Name="Квалификация" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Отделы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название_отдела" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Пользователи">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Логин" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Пароль" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="id_сотрудника" Type="int" />
+        </EntityType>
+        <EntityType Name="Сертификаты">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название_сертификата" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Дата_рождения" Type="date" />
+          <Property Name="Пол" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Сотрудники_Навыки">
+          <Key>
+            <PropertyRef Name="id_сотрудника" />
+            <PropertyRef Name="id_навыка" />
+          </Key>
+          <Property Name="id_сотрудника" Type="int" Nullable="false" />
+          <Property Name="id_навыка" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сотрудники_Сертификаты">
+          <Key>
+            <PropertyRef Name="id_сотрудника" />
+            <PropertyRef Name="id_сертификата" />
+          </Key>
+          <Property Name="id_сотрудника" Type="int" Nullable="false" />
+          <Property Name="id_сертификата" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__График_ра__id_со__52593CB8">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="График_работы" Type="Self.График_работы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="График_работы">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Заработна__id_со__4F7CD00D">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="Заработная_плата" Type="Self.Заработная_плата" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Заработная_плата">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__История_р__id_до__4BAC3F29">
+          <End Role="Должности" Type="Self.Должности" Multiplicity="1" />
+          <End Role="История_работы" Type="Self.История_работы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должности">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="История_работы">
+              <PropertyRef Name="id_должности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__История_р__id_от__4CA06362">
+          <End Role="Отделы" Type="Self.Отделы" Multiplicity="1" />
+          <End Role="История_работы" Type="Self.История_работы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Отделы">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="История_работы">
+              <PropertyRef Name="id_отдела" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__История_р__id_со__4AB81AF0">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="История_работы" Type="Self.История_работы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="История_работы">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Контакты__id_сот__47DBAE45">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="Контакты" Type="Self.Контакты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Контакты">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Образован__id_со__44FF419A">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="Образование" Type="Self.Образование" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Образование">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Пользоват__id_со__3A81B327">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="0..1" />
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Пользователи">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__id_на__5629CD9C">
+          <End Role="Навыки" Type="Self.Навыки" Multiplicity="1" />
+          <End Role="Сотрудники_Навыки" Type="Self.Сотрудники_Навыки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Навыки">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Сотрудники_Навыки">
+              <PropertyRef Name="id_навыка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__id_се__59FA5E80">
+          <End Role="Сертификаты" Type="Self.Сертификаты" Multiplicity="1" />
+          <End Role="Сотрудники_Сертификаты" Type="Self.Сотрудники_Сертификаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сертификаты">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Сотрудники_Сертификаты">
+              <PropertyRef Name="id_сертификата" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__id_со__5535A963">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="Сотрудники_Навыки" Type="Self.Сотрудники_Навыки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Сотрудники_Навыки">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__id_со__59063A47">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="Сотрудники_Сертификаты" Type="Self.Сотрудники_Сертификаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Сотрудники_Сертификаты">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="График_работы" EntityType="Self.График_работы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Должности" EntityType="Self.Должности" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Заработная_плата" EntityType="Self.Заработная_плата" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="История_работы" EntityType="Self.История_работы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Контакты" EntityType="Self.Контакты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Навыки" EntityType="Self.Навыки" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Образование" EntityType="Self.Образование" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Отделы" EntityType="Self.Отделы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сертификаты" EntityType="Self.Сертификаты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сотрудники_Навыки" EntityType="Self.Сотрудники_Навыки" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сотрудники_Сертификаты" EntityType="Self.Сотрудники_Сертификаты" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__График_ра__id_со__52593CB8" Association="Self.FK__График_ра__id_со__52593CB8">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="График_работы" EntitySet="График_работы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Заработна__id_со__4F7CD00D" Association="Self.FK__Заработна__id_со__4F7CD00D">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Заработная_плата" EntitySet="Заработная_плата" />
+          </AssociationSet>
+          <AssociationSet Name="FK__История_р__id_до__4BAC3F29" Association="Self.FK__История_р__id_до__4BAC3F29">
+            <End Role="Должности" EntitySet="Должности" />
+            <End Role="История_работы" EntitySet="История_работы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__История_р__id_от__4CA06362" Association="Self.FK__История_р__id_от__4CA06362">
+            <End Role="Отделы" EntitySet="Отделы" />
+            <End Role="История_работы" EntitySet="История_работы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__История_р__id_со__4AB81AF0" Association="Self.FK__История_р__id_со__4AB81AF0">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="История_работы" EntitySet="История_работы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Контакты__id_сот__47DBAE45" Association="Self.FK__Контакты__id_сот__47DBAE45">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Контакты" EntitySet="Контакты" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Образован__id_со__44FF419A" Association="Self.FK__Образован__id_со__44FF419A">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Образование" EntitySet="Образование" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Пользоват__id_со__3A81B327" Association="Self.FK__Пользоват__id_со__3A81B327">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Пользователи" EntitySet="Пользователи" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__id_на__5629CD9C" Association="Self.FK__Сотрудник__id_на__5629CD9C">
+            <End Role="Навыки" EntitySet="Навыки" />
+            <End Role="Сотрудники_Навыки" EntitySet="Сотрудники_Навыки" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__id_се__59FA5E80" Association="Self.FK__Сотрудник__id_се__59FA5E80">
+            <End Role="Сертификаты" EntitySet="Сертификаты" />
+            <End Role="Сотрудники_Сертификаты" EntitySet="Сотрудники_Сертификаты" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__id_со__5535A963" Association="Self.FK__Сотрудник__id_со__5535A963">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Сотрудники_Навыки" EntitySet="Сотрудники_Навыки" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__id_со__59063A47" Association="Self.FK__Сотрудник__id_со__59063A47">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Сотрудники_Сертификаты" EntitySet="Сотрудники_Сертификаты" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="График_работы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_сотрудника" Type="Int32" Nullable="false" />
+          <Property Name="Тип_графика" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Примечание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.FK__График_ра__id_со__52593CB8" FromRole="График_работы" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Должности">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_должности" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="История_работы" Relationship="Self.FK__История_р__id_до__4BAC3F29" FromRole="Должности" ToRole="История_работы" />
+        </EntityType>
+        <EntityType Name="Заработная_плата">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_сотрудника" Type="Int32" Nullable="false" />
+          <Property Name="Дата_выплаты" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Сумма" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.FK__Заработна__id_со__4F7CD00D" FromRole="Заработная_плата" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="История_работы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_сотрудника" Type="Int32" Nullable="false" />
+          <Property Name="id_должности" Type="Int32" Nullable="false" />
+          <Property Name="id_отдела" Type="Int32" Nullable="false" />
+          <Property Name="Дата_начала" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Дата_окончания" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Должности" Relationship="Self.FK__История_р__id_до__4BAC3F29" FromRole="История_работы" ToRole="Должности" />
+          <NavigationProperty Name="Отделы" Relationship="Self.FK__История_р__id_от__4CA06362" FromRole="История_работы" ToRole="Отделы" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.FK__История_р__id_со__4AB81AF0" FromRole="История_работы" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Контакты">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_сотрудника" Type="Int32" Nullable="false" />
+          <Property Name="Телефон" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.FK__Контакты__id_сот__47DBAE45" FromRole="Контакты" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Навыки">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_навыка" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.Сотрудники_Навыки" FromRole="Навыки" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Образование">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_сотрудника" Type="Int32" Nullable="false" />
+          <Property Name="Учебное_заведение" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Специальность" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Дата_окончания" Type="DateTime" Precision="0" />
+          <Property Name="Квалификация" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.FK__Образован__id_со__44FF419A" FromRole="Образование" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Отделы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_отдела" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="История_работы" Relationship="Self.FK__История_р__id_от__4CA06362" FromRole="Отделы" ToRole="История_работы" />
+        </EntityType>
+        <EntityType Name="Пользователи">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Логин" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Пароль" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_сотрудника" Type="Int32" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.FK__Пользоват__id_со__3A81B327" FromRole="Пользователи" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Сертификаты">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_сертификата" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.Сотрудники_Сертификаты" FromRole="Сертификаты" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Дата_рождения" Type="DateTime" Precision="0" />
+          <Property Name="Пол" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="График_работы" Relationship="Self.FK__График_ра__id_со__52593CB8" FromRole="Сотрудники" ToRole="График_работы" />
+          <NavigationProperty Name="Заработная_плата" Relationship="Self.FK__Заработна__id_со__4F7CD00D" FromRole="Сотрудники" ToRole="Заработная_плата" />
+          <NavigationProperty Name="История_работы" Relationship="Self.FK__История_р__id_со__4AB81AF0" FromRole="Сотрудники" ToRole="История_работы" />
+          <NavigationProperty Name="Контакты" Relationship="Self.FK__Контакты__id_сот__47DBAE45" FromRole="Сотрудники" ToRole="Контакты" />
+          <NavigationProperty Name="Образование" Relationship="Self.FK__Образован__id_со__44FF419A" FromRole="Сотрудники" ToRole="Образование" />
+          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Пользоват__id_со__3A81B327" FromRole="Сотрудники" ToRole="Пользователи" />
+          <NavigationProperty Name="Навыки" Relationship="Self.Сотрудники_Навыки" FromRole="Сотрудники" ToRole="Навыки" />
+          <NavigationProperty Name="Сертификаты" Relationship="Self.Сотрудники_Сертификаты" FromRole="Сотрудники" ToRole="Сертификаты" />
+        </EntityType>
+        <Association Name="FK__График_ра__id_со__52593CB8">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="График_работы" Type="Self.График_работы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="График_работы">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__История_р__id_до__4BAC3F29">
+          <End Role="Должности" Type="Self.Должности" Multiplicity="1" />
+          <End Role="История_работы" Type="Self.История_работы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должности">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="История_работы">
+              <PropertyRef Name="id_должности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Заработна__id_со__4F7CD00D">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="Заработная_плата" Type="Self.Заработная_плата" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Заработная_плата">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__История_р__id_от__4CA06362">
+          <End Role="Отделы" Type="Self.Отделы" Multiplicity="1" />
+          <End Role="История_работы" Type="Self.История_работы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Отделы">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="История_работы">
+              <PropertyRef Name="id_отдела" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__История_р__id_со__4AB81AF0">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="История_работы" Type="Self.История_работы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="История_работы">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Контакты__id_сот__47DBAE45">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="Контакты" Type="Self.Контакты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Контакты">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Образован__id_со__44FF419A">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="Образование" Type="Self.Образование" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Образование">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Пользоват__id_со__3A81B327">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="0..1" />
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Пользователи">
+              <PropertyRef Name="id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Сотрудники_Навыки">
+          <End Role="Навыки" Type="Self.Навыки" Multiplicity="*" />
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="*" />
+        </Association>
+        <Association Name="Сотрудники_Сертификаты">
+          <End Role="Сертификаты" Type="Self.Сертификаты" Multiplicity="*" />
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="График_работы" EntityType="Self.График_работы" />
+          <EntitySet Name="Должности" EntityType="Self.Должности" />
+          <EntitySet Name="Заработная_плата" EntityType="Self.Заработная_плата" />
+          <EntitySet Name="История_работы" EntityType="Self.История_работы" />
+          <EntitySet Name="Контакты" EntityType="Self.Контакты" />
+          <EntitySet Name="Навыки" EntityType="Self.Навыки" />
+          <EntitySet Name="Образование" EntityType="Self.Образование" />
+          <EntitySet Name="Отделы" EntityType="Self.Отделы" />
+          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" />
+          <EntitySet Name="Сертификаты" EntityType="Self.Сертификаты" />
+          <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" />
+          <AssociationSet Name="FK__График_ра__id_со__52593CB8" Association="Self.FK__График_ра__id_со__52593CB8">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="График_работы" EntitySet="График_работы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__История_р__id_до__4BAC3F29" Association="Self.FK__История_р__id_до__4BAC3F29">
+            <End Role="Должности" EntitySet="Должности" />
+            <End Role="История_работы" EntitySet="История_работы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Заработна__id_со__4F7CD00D" Association="Self.FK__Заработна__id_со__4F7CD00D">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Заработная_плата" EntitySet="Заработная_плата" />
+          </AssociationSet>
+          <AssociationSet Name="FK__История_р__id_от__4CA06362" Association="Self.FK__История_р__id_от__4CA06362">
+            <End Role="Отделы" EntitySet="Отделы" />
+            <End Role="История_работы" EntitySet="История_работы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__История_р__id_со__4AB81AF0" Association="Self.FK__История_р__id_со__4AB81AF0">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="История_работы" EntitySet="История_работы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Контакты__id_сот__47DBAE45" Association="Self.FK__Контакты__id_сот__47DBAE45">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Контакты" EntitySet="Контакты" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Образован__id_со__44FF419A" Association="Self.FK__Образован__id_со__44FF419A">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Образование" EntitySet="Образование" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Пользоват__id_со__3A81B327" Association="Self.FK__Пользоват__id_со__3A81B327">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Пользователи" EntitySet="Пользователи" />
+          </AssociationSet>
+          <AssociationSet Name="Сотрудники_Навыки" Association="Self.Сотрудники_Навыки">
+            <End Role="Навыки" EntitySet="Навыки" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+          <AssociationSet Name="Сотрудники_Сертификаты" Association="Self.Сотрудники_Сертификаты">
+            <End Role="Сертификаты" EntitySet="Сертификаты" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="График_работы">
+            <EntityTypeMapping TypeName="Model.График_работы">
+              <MappingFragment StoreEntitySet="График_работы">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_сотрудника" ColumnName="id_сотрудника" />
+                <ScalarProperty Name="Тип_графика" ColumnName="Тип_графика" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Должности">
+            <EntityTypeMapping TypeName="Model.Должности">
+              <MappingFragment StoreEntitySet="Должности">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Название_должности" ColumnName="Название_должности" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Заработная_плата">
+            <EntityTypeMapping TypeName="Model.Заработная_плата">
+              <MappingFragment StoreEntitySet="Заработная_плата">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_сотрудника" ColumnName="id_сотрудника" />
+                <ScalarProperty Name="Дата_выплаты" ColumnName="Дата_выплаты" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="История_работы">
+            <EntityTypeMapping TypeName="Model.История_работы">
+              <MappingFragment StoreEntitySet="История_работы">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_сотрудника" ColumnName="id_сотрудника" />
+                <ScalarProperty Name="id_должности" ColumnName="id_должности" />
+                <ScalarProperty Name="id_отдела" ColumnName="id_отдела" />
+                <ScalarProperty Name="Дата_начала" ColumnName="Дата_начала" />
+                <ScalarProperty Name="Дата_окончания" ColumnName="Дата_окончания" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Контакты">
+            <EntityTypeMapping TypeName="Model.Контакты">
+              <MappingFragment StoreEntitySet="Контакты">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_сотрудника" ColumnName="id_сотрудника" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Навыки">
+            <EntityTypeMapping TypeName="Model.Навыки">
+              <MappingFragment StoreEntitySet="Навыки">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Название_навыка" ColumnName="Название_навыка" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Образование">
+            <EntityTypeMapping TypeName="Model.Образование">
+              <MappingFragment StoreEntitySet="Образование">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_сотрудника" ColumnName="id_сотрудника" />
+                <ScalarProperty Name="Учебное_заведение" ColumnName="Учебное_заведение" />
+                <ScalarProperty Name="Специальность" ColumnName="Специальность" />
+                <ScalarProperty Name="Дата_окончания" ColumnName="Дата_окончания" />
+                <ScalarProperty Name="Квалификация" ColumnName="Квалификация" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Отделы">
+            <EntityTypeMapping TypeName="Model.Отделы">
+              <MappingFragment StoreEntitySet="Отделы">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Название_отдела" ColumnName="Название_отдела" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пользователи">
+            <EntityTypeMapping TypeName="Model.Пользователи">
+              <MappingFragment StoreEntitySet="Пользователи">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="id_сотрудника" ColumnName="id_сотрудника" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сертификаты">
+            <EntityTypeMapping TypeName="Model.Сертификаты">
+              <MappingFragment StoreEntitySet="Сертификаты">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Название_сертификата" ColumnName="Название_сертификата" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сотрудники">
+            <EntityTypeMapping TypeName="Model.Сотрудники">
+              <MappingFragment StoreEntitySet="Сотрудники">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Дата_рождения" ColumnName="Дата_рождения" />
+                <ScalarProperty Name="Пол" ColumnName="Пол" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Сотрудники_Навыки" TypeName="Model.Сотрудники_Навыки" StoreEntitySet="Сотрудники_Навыки">
+            <EndProperty Name="Навыки">
+              <ScalarProperty Name="id" ColumnName="id_навыка" />
+            </EndProperty>
+            <EndProperty Name="Сотрудники">
+              <ScalarProperty Name="id" ColumnName="id_сотрудника" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Сотрудники_Сертификаты" TypeName="Model.Сотрудники_Сертификаты" StoreEntitySet="Сотрудники_Сертификаты">
+            <EndProperty Name="Сертификаты">
+              <ScalarProperty Name="id" ColumnName="id_сертификата" />
+            </EndProperty>
+            <EndProperty Name="Сотрудники">
+              <ScalarProperty Name="id" ColumnName="id_сотрудника" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

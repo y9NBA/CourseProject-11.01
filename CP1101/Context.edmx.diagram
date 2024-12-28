@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="856169b90a1a4aeaaeb448ee8bebf820" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="Model.График_работы" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Должности" Width="1.5" PointX="6" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Заработная_плата" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.История_работы" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Контакты" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Навыки" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Образование" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Отделы" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Пользователи" Width="1.5" PointX="5.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Сертификаты" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Сотрудники" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__График_ра__id_со__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__История_р__id_до__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Заработна__id_со__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__История_р__id_от__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__История_р__id_со__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Контакты__id_сот__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Образован__id_со__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Пользоват__id_со__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.Сотрудники_Навыки" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.Сотрудники_Сертификаты" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
